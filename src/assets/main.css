@@ -1,35 +1,220 @@
-@import './base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+* {
+  box-sizing: border-box;
 }
 
-a,
-.green {
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(130, 87, 230, 0.28), transparent 35%),
+    linear-gradient(135deg, #080711, #141020 55%, #07060c);
+  color: #f7f1ff;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+a {
+  color: inherit;
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+button {
+  font: inherit;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+.home-view,
+.game-view {
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.hero {
+  max-width: 760px;
+  margin: 12vh auto 0;
+  padding: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  background: rgba(12, 9, 24, 0.72);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  color: #c9a8ff;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.95;
+}
+
+.hero-description {
+  max-width: 620px;
+  margin: 24px 0 32px;
+  color: #d8ccec;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.main-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.main-button {
+  background: #f2e7ff;
+  color: #130a22;
+}
+
+.secondary-button {
+  margin-left: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f7f1ff;
+}
+
+.game-view {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.game-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.back-link {
+  width: fit-content;
+  color: #c9a8ff;
+  font-weight: 700;
+}
+
+.score-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.score-panel div {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.score-panel span {
+  display: block;
+  margin-bottom: 8px;
+  color: #b9a9d0;
+}
+
+.score-panel strong {
+  font-size: 2rem;
+}
+
+.game-controls {
+  margin-bottom: 28px;
+  padding: 24px;
+  border: 1px solid rgba(201, 168, 255, 0.2);
+  border-radius: 24px;
+  background: rgba(12, 9, 24, 0.72);
+}
+
+.game-controls p {
+  margin: 0 0 18px;
+  color: #e7dcf8;
+  font-size: 1.1rem;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 18px;
+}
+
+.rune-card {
+  min-height: 160px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #f7f1ff;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.rune-card:not(:disabled):hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 168, 255, 0.8);
+}
+
+.rune-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.rune-card--active {
+  transform: scale(1.06);
+  border-color: #f2e7ff;
+  background: rgba(201, 168, 255, 0.28);
+  box-shadow: 0 0 36px rgba(201, 168, 255, 0.55);
+}
+
+.rune-card__symbol {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.rune-card__name {
+  display: block;
+  color: #dccff2;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .home-view,
+  .game-view {
+    padding: 20px;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  .hero {
+    padding: 32px 24px;
+  }
+
+  .score-panel,
+  .game-board {
+    grid-template-columns: 1fr;
+  }
+
+  .secondary-button {
+    margin-top: 12px;
+    margin-left: 0;
   }
 }
